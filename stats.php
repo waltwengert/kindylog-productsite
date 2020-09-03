@@ -115,14 +115,14 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-      <a class="navbar-brand" href="index.php">KindyLog</a>
+      <a class="navbar-brand" href="index.html">KindyLog</a>
 
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="index.php">Home</a>
+          <a class="nav-link" href="index.html">Home</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="purchase.php">Purchase</a>
+          <a class="nav-link" href="purchase.html">Purchase</a>
         </li>
       </ul>
       <ul class="navbar-nav navbar-right">
