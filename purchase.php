@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KindyLog Purchase</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+  <script>
+  function nameValidation(nametype, value) {
+    var letters = /^[A-Za-z,.'-]+$/;
+
+    if (value == "") {
+      alert(nametype + " must be filled out");
+    } else if (value.length > 50) {
+      alert(nametype + " can't be longer than 50 characters");
+    } else if (!value.match(letters)) {
+      alert(nametype + " must only include letters");
+    } else {
+      return true;
+    }
+
+    return false;
+  }
+
+  function validateForm() {
+    var firstName = document.forms["expForm"]["firstName"].value;
+    var lastName = document.forms["expForm"]["lastName"].value;
+
+    if (!nameValidation("First name", firstName)
+      || !nameValidation("Last name", lastName)) {
+      return false;
+    }
+
+    //Email regex taken from emailregex.com
+    //var emailPattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+
+    var email = document.forms["expForm"]["email"].value;
+    if (email == "") {
+      alert("Email must be filled out");
+      return false;
+    } else if (email.length > 255) {
+      alert("Email can't be longer than 255 characters");
+      return false;
+      /*
+    } else if (!value.match(emailPattern)) {
+      alert("Email must follow a valid email format");
+      return false;
+       */
+    }
+
+    var rating = 0;
+    if (document.getElementById('r1').checked) {
+      rating = 1;
+    } else if (document.getElementById('r2').checked) {
+      rating = 2;
+    } else if (document.getElementById('r3').checked) {
+      rating = 3;
+    } else if (document.getElementById('r4').checked) {
+      rating = 4;
+    } else if (document.getElementById('r5').checked) {
+      rating = 5;
+    } else {
+      alert("Please select a level of interest");
+      return false;
+    }
+
+    var getUrl = "sendexp.php?fname="+firstName+"&lname="+lastName+"&email="+email+"&rating="+rating;
+    console.log(getUrl);
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange=function() {
+      if (this.readyState==4 && this.status==200) {
+        console.log("hello");
+      }
+    };
+    xmlhttp.open("GET", getUrl, true);
+    xmlhttp.send();
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <a class="navbar-brand" href="index.php">KindyLog</a>
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.php">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="purchase.php">Purchase</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" href="stats.php">Statistics</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container-fluid" style="margin-top:80px">
+    <h1>Expression of Interest</h1><br>
+    <p>Our product is not yet available for purchase, however if you fill out
+      your details in the form below we'll let you be one of the first to know when it becomes available!</p>
+
+    <form name="expForm" action="/interestexpressed.php" onsubmit="return validateForm()" method="post">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="firstName">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="lastName">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+
+      <div>
+        <label>On a scale of 1-5, how interested are you in KindyLog? (1 = not interested; 5 = extremely interested)</label><br>
+
+        <label class="interest-radio radio-inline"><input type="radio" name="optradio" id="r1"/>1</label>
+        <label class="interest-radio radio-inline"><input type="radio" name="optradio" id="r2"/>2</label>
+        <label class="interest-radio radio-inline"><input type="radio" name="optradio" id="r3"/>3</label>
+        <label class="interest-radio radio-inline"><input type="radio" name="optradio" id="r4"/>4</label>
+        <label class="interest-radio radio-inline"><input type="radio" name="optradio" id="r5"/>5</label>
+      </div>
+      <br>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

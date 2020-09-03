@@ -1,0 +1,39 @@
+@media only screen and (max-width: 1000px) {
+  .main {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.intro {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.vid {
+  padding: 0 4rem 0 4rem;
+  display: flex;
+  flex: 1;
+}
+
+#interest_chart {
+  overflow-y: auto;
+  height: 70vh;
+}
+
+.interest-radio {
+  margin-right: 2rem;
+}
+
+input[name="optradio"] {
+  margin-right: 0.5rem;
+}
