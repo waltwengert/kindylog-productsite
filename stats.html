@@ -1,14 +1,18 @@
-<?php include("inc/sessionStart.php");?>
+<!--<?php include("inc/sessionStart.php");?>
 <?php
   require_once "uq/auth.php";
   auth_require();
 
   $UQ = auth_get_payload();
-?>
+?>-->
 
 <!DOCTYPE html>
 <html>
   <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+
     <title>KindyLog Stats</title>
 
     <link rel="stylesheet" href="styles/main.css" />
@@ -59,6 +63,12 @@
             var visitArr = sqlReturn[2];
             var purchaseHitArr = sqlReturn[3];
             var interestAllArr = sqlReturn[4];
+
+            console.log(interestNoArr);
+            console.log(interestLvlArr);
+            console.log(visitArr);
+            console.log(purchaseHitArr);
+            console.log(interestAllArr);
 
             //Merging arrays together for use in a single table:
             var merged = mergeWeeklyData(visitArr, purchaseHitArr);

@@ -8,6 +8,8 @@
   $con = mysqli_connect('localhost', 'root', '123456', 'Product_Site');
   if (!$con) {
     die('Could not connect: ' . mysqli_error($con));
+  } else {
+    echo 'connected';
   }
 
   // prepare and bind
@@ -17,7 +19,7 @@
 
   $stmt->execute();
   $stmt->close();
-  $conn->close();
+  $con->close();
 
   mysqli_close($con);
 ?>
